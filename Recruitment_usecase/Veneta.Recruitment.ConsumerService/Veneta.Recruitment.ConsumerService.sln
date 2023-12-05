@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veneta.Recruitment.ConsumerService", "Veneta.Recruitment.ConsumerService\Veneta.Recruitment.ConsumerService.csproj", "{7C0E4343-F871-4B75-9256-C5B48611921B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumerServiceTests", "ConsumerServiceTests\ConsumerServiceTests.csproj", "{C8B9452E-2AE0-49DF-91B3-B7D56A8CAAB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C0E4343-F871-4B75-9256-C5B48611921B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0E4343-F871-4B75-9256-C5B48611921B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0E4343-F871-4B75-9256-C5B48611921B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C0E4343-F871-4B75-9256-C5B48611921B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B9452E-2AE0-49DF-91B3-B7D56A8CAAB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B9452E-2AE0-49DF-91B3-B7D56A8CAAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B9452E-2AE0-49DF-91B3-B7D56A8CAAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B9452E-2AE0-49DF-91B3-B7D56A8CAAB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A84E0FFB-2B44-4246-B49F-13293A570CB2}
+	EndGlobalSection
+EndGlobal
