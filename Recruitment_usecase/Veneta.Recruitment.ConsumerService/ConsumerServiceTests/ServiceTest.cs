@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Json;
 using Veneta.Recruitment.ConsumerService.Models;
-using Veneta.Recruitment.ConsumerService.Models.Requests;
+using Veneta.Recruitment.ConsumerService.Requests;
+using Veneta.Recruitment.ConsumerService.ValueObjects;
 
 namespace ConsumerServiceTests
 {
@@ -30,7 +31,7 @@ namespace ConsumerServiceTests
             Assert.Equal(consumer.FirstName, view.FirstName);
             Assert.Equal(consumer.LastName, view.LastName);
             Assert.Equal(consumer.Address.HouseNumber, view.Address.HouseNumber);
-            Assert.Equal(consumer.Address.PostalCode, view.Address.PostcalCode);
+            Assert.Equal(consumer.Address.PostalCode, view.Address.PostalCode);
             Assert.Equal(consumer.Address.Street, view.Address.Street);
         }
     }
