@@ -1,5 +1,6 @@
 ﻿using NEventStore;
 using NEventStore.PollingClient;
+using Veneta.Recruitment.ConsumerService.Models;
 using Veneta.Recruitment.ConsumerService.Repository;
 
 namespace Veneta.Recruitment.ConsumerService
@@ -23,16 +24,31 @@ namespace Veneta.Recruitment.ConsumerService
             {
                 _scope = _serviceProvider.CreateScope();
                 var consumerRepository = _scope.ServiceProvider.GetRequiredService<ConsumerRepository>();
-                _client = new PollingClient2(_storeEvents.Advanced, commit =>
-                {
-                    foreach (var eventMessage in commit.Events)
+                var logger = _scope.ServiceProvider.GetRequiredService<ILogger<ConsumerProjection>>();
+                _client = new PollingClient2(_storeEvents.Advanced, (commit) =>
                     {
-                        var @event = eventMessage.Body;
-                        //use the events to create and store the projection
-                    }
-                    return PollingClient2.HandlingResult.MoveToNext;
-                },
-                waitInterval: 500);
+                        var consumerId = Guid.Parse(commit.StreamId);
+                        var consumer = consumerRepository.Get(consumerId, cancellationToken).GetAwaiter().GetResult();
+
+                        foreach (var eventMessage in commit.Events)
+                        {
+                            if (eventMessage.Body is not ConsumerAggregateEvent @event)
+                            {
+                                logger.LogWarning("Event {EventType} is not a ConsumerAggregateEvent",
+                                    eventMessage.Body.GetType().Name);
+                                continue;
+                            }
+
+                            logger.LogInformation("Processing event {EventType}", @event.GetType().Name);
+
+                            var projection = MapToProjection(@event, consumer);
+
+                            consumerRepository.Save(projection).GetAwaiter().GetResult();
+                        }
+
+                        return PollingClient2.HandlingResult.MoveToNext;
+                    },
+                    waitInterval: 500);
                 _client.StartFromBucket("consumer");
             }, cancellationToken);
             return Task.CompletedTask;
@@ -44,6 +60,38 @@ namespace Veneta.Recruitment.ConsumerService
             _client.Dispose();
             _scope.Dispose();
             return Task.CompletedTask;
+        }
+
+        private ConsumerView MapToProjection(ConsumerAggregateEvent @event, ConsumerView? consumer)
+        {
+            if (@event is ConsumerAggregateEvent.ConsumerCreatedEvent createdEvent)
+            {
+                return new ConsumerView
+                {
+                    Id = createdEvent.ConsumerId.Value,
+                    Address = createdEvent.Address.Map(createdEvent.ConsumerId),
+                    FirstName = createdEvent.FirstName.Value,
+                    LastName = createdEvent.LastName.Value
+                };
+            }
+
+
+            if (@event is ConsumerAggregateEvent.ConsumerNameUpdatedEvent nameUpdatedEvent)
+            {
+                consumer!.FirstName = nameUpdatedEvent.FirstName?.Value;
+                consumer!.LastName = nameUpdatedEvent.LastName?.Value;
+
+                return consumer!;
+            }
+
+            if (@event is ConsumerAggregateEvent.ConsumerAddressUpdatedEvent addressUpdatedEvent)
+            {
+                consumer!.Address = addressUpdatedEvent.Address.Map(addressUpdatedEvent.ConsumerId);
+
+                return consumer!;
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(@event));
         }
     }
 }
