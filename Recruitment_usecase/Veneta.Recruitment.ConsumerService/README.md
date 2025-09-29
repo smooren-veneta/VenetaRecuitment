@@ -15,4 +15,4 @@ You can use this solution or create something from scratch you have 6 hours to c
 # Api crawler
 
 ## Objective:
-Create a project that pulls all the customers and stores it seperatly.
+Create a solution that pulls all the customers and stores it seperatly.
