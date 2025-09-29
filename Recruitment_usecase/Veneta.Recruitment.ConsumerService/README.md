@@ -1,20 +1,26 @@
 # Event Sourcing Implementation for E-commerce Platform API
 
-## Objective:
-The objective of this assignment is to design and implement an API using Event Sourcing for an E-commerce platform. 
-The E-commerce platform has the following consumer business processes:
-* Create consumer for new customers
-* Update First and Lastname
-* Update Address
-* Show an consumer.
-* Show all consumers.
-The company also wants you to add some test coverage.
+## Objective
+The objective of this assignment is to design and implement an API using **Event Sourcing** for an e-commerce platform.  
 
-You can use this solution or create something from scratch.
+The platform should support the following consumer-related business processes:
+- Create a consumer (for new customers)  
+- Update a consumer’s first and last name  
+- Update a consumer’s address  
+- Retrieve a single consumer  
+- Retrieve all consumers  
 
-# Api crawler
+Additionally, the company requires you to include **test coverage** for your implementation.  
 
-## Objective:
-Create a seperate solution that pulls all the customers and stores it seperatly.
+You may build on the provided solution or create one from scratch.
 
-You have 4 hours to complete as much as possible.
+---
+
+# API Crawler
+
+## Objective
+Create a separate solution that retrieves all consumers from the platform and stores them independently.  
+
+---
+
+⏱️ **Time limit:** You have 4 hours to complete as much of the assignment as possible.
