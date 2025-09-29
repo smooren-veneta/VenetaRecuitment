@@ -15,6 +15,6 @@ You can use this solution or create something from scratch.
 # Api crawler
 
 ## Objective:
-Create a solution that pulls all the customers and stores it seperatly.
+Create a seperate solution that pulls all the customers and stores it seperatly.
 
 You have 6 hours to complete as much as possible.
